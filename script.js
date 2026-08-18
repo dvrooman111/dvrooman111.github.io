@@ -64,11 +64,13 @@
       return item.key === 'E' ? 'engagement' : (item.key === 'R' ? 'representation' : 'action');
     }
     function setCurrent(item) {
+      el.currentCategory.className = 'current-category';
       if (!item) {
         el.currentCategory.textContent = 'Ready';
         el.currentOption.textContent = 'Your first UDL strategy will appear here.';
       } else {
         el.currentCategory.textContent = item.category;
+        el.currentCategory.classList.add(categoryClass(item));
         el.currentOption.textContent = item.text;
       }
     }
@@ -90,7 +92,7 @@
       for (var i = 0; i < state.called.length; i++) {
         var item = state.called[i];
         var card = document.createElement('article');
-        card.className = 'history-card';
+        card.className = 'history-card ' + categoryClass(item);
         var content = document.createElement('div');
         var category = document.createElement('div');
         category.className = 'history-category ' + categoryClass(item);
