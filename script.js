@@ -1,95 +1,81 @@
 (function () {
   'use strict';
 
-  const CATEGORY_META = {
-    E: {
-      name: 'Engagement',
-      label: 'WHY',
-      cssClass: 'engagement',
-      options: [
-        'Offer meaningful choices',
-        'Connect to career goals',
-        'Use real-world examples',
-        'Connect to prior experience',
-        'Set learning goals',
-        'Build in low-stakes practice',
-        'Invite student questions',
-        'Use authentic problems',
-        'Include peer collaboration',
-        'Provide optional challenges',
-        'Build in reflection',
-        'Show progress toward goals',
-        'Explain why it matters',
-        'Invite student feedback',
-        'Offer flexible pathways'
-      ]
-    },
-    R: {
-      name: 'Representation',
-      label: 'WHAT',
-      cssClass: 'representation',
-      options: [
-        'Provide a worked example',
-        'Show an exemplar',
-        'Chunk complex content',
-        'Highlight key concepts',
-        'Define key vocabulary',
-        'Use a graphic organizer',
-        'Caption videos',
-        'Provide a transcript',
-        'Pair text with visuals',
-        'Provide multiple examples',
-        'Connect to prior knowledge',
-        'Explain a concept another way',
-        'Provide guiding questions',
-        'Model the thinking process',
-        'Summarize key takeaways'
-      ]
-    },
-    A: {
-      name: 'Action & Expression',
-      label: 'HOW',
-      cssClass: 'action',
-      options: [
-        'Offer response format choices',
-        'Allow a recorded response',
-        'Allow a written response',
-        'Allow an oral response',
-        'Use a planning checklist',
-        'Provide assignment milestones',
-        'Provide a model or exemplar',
-        'Use a grading rubric',
-        'Build in self-assessment',
-        'Build in peer feedback',
-        'Allow draft-and-revise',
-        'Offer formative feedback',
-        'Use progress checkpoints',
-        'Support project planning',
-        'Let students track progress'
-      ]
-    }
+  const OPTIONS = [
+    // Engagement (E)
+    { code: 'E 01', category: 'Engagement', shortCategory: 'E', text: 'Offer meaningful choices' },
+    { code: 'E 02', category: 'Engagement', shortCategory: 'E', text: 'Connect to career goals' },
+    { code: 'E 03', category: 'Engagement', shortCategory: 'E', text: 'Use real-world examples' },
+    { code: 'E 04', category: 'Engagement', shortCategory: 'E', text: 'Connect to prior experience' },
+    { code: 'E 05', category: 'Engagement', shortCategory: 'E', text: 'Set learning goals' },
+    { code: 'E 06', category: 'Engagement', shortCategory: 'E', text: 'Build in low-stakes practice' },
+    { code: 'E 07', category: 'Engagement', shortCategory: 'E', text: 'Invite student questions' },
+    { code: 'E 08', category: 'Engagement', shortCategory: 'E', text: 'Use authentic problems' },
+    { code: 'E 09', category: 'Engagement', shortCategory: 'E', text: 'Include peer collaboration' },
+    { code: 'E 10', category: 'Engagement', shortCategory: 'E', text: 'Provide optional challenges' },
+    { code: 'E 11', category: 'Engagement', shortCategory: 'E', text: 'Build in reflection' },
+    { code: 'E 12', category: 'Engagement', shortCategory: 'E', text: 'Show progress toward goals' },
+    { code: 'E 13', category: 'Engagement', shortCategory: 'E', text: 'Explain why it matters' },
+    { code: 'E 14', category: 'Engagement', shortCategory: 'E', text: 'Invite student feedback' },
+    { code: 'E 15', category: 'Engagement', shortCategory: 'E', text: 'Offer flexible pathways' },
+
+    // Representation (R)
+    { code: 'R 01', category: 'Representation', shortCategory: 'R', text: 'Provide a worked example' },
+    { code: 'R 02', category: 'Representation', shortCategory: 'R', text: 'Show an exemplar' },
+    { code: 'R 03', category: 'Representation', shortCategory: 'R', text: 'Chunk complex content' },
+    { code: 'R 04', category: 'Representation', shortCategory: 'R', text: 'Highlight key concepts' },
+    { code: 'R 05', category: 'Representation', shortCategory: 'R', text: 'Define key vocabulary' },
+    { code: 'R 06', category: 'Representation', shortCategory: 'R', text: 'Use a graphic organizer' },
+    { code: 'R 07', category: 'Representation', shortCategory: 'R', text: 'Caption videos' },
+    { code: 'R 08', category: 'Representation', shortCategory: 'R', text: 'Provide a transcript' },
+    { code: 'R 09', category: 'Representation', shortCategory: 'R', text: 'Pair text with visuals' },
+    { code: 'R 10', category: 'Representation', shortCategory: 'R', text: 'Provide multiple examples' },
+    { code: 'R 11', category: 'Representation', shortCategory: 'R', text: 'Connect to prior knowledge' },
+    { code: 'R 12', category: 'Representation', shortCategory: 'R', text: 'Explain it another way' },
+    { code: 'R 13', category: 'Representation', shortCategory: 'R', text: 'Provide guiding questions' },
+    { code: 'R 14', category: 'Representation', shortCategory: 'R', text: 'Model the thinking process' },
+    { code: 'R 15', category: 'Representation', shortCategory: 'R', text: 'Summarize key takeaways' },
+
+    // Action & Expression (A)
+    { code: 'A 01', category: 'Action & Expression', shortCategory: 'A', text: 'Offer response format choices' },
+    { code: 'A 02', category: 'Action & Expression', shortCategory: 'A', text: 'Use a planning checklist' },
+    { code: 'A 03', category: 'Action & Expression', shortCategory: 'A', text: 'Provide assignment milestones' },
+    { code: 'A 04', category: 'Action & Expression', shortCategory: 'A', text: 'Use a grading rubric' },
+    { code: 'A 05', category: 'Action & Expression', shortCategory: 'A', text: 'Build in self-assessment' },
+    { code: 'A 06', category: 'Action & Expression', shortCategory: 'A', text: 'Build in peer feedback' },
+    { code: 'A 07', category: 'Action & Expression', shortCategory: 'A', text: 'Allow draft-and-revise' },
+    { code: 'A 08', category: 'Action & Expression', shortCategory: 'A', text: 'Offer formative feedback' },
+    { code: 'A 09', category: 'Action & Expression', shortCategory: 'A', text: 'Use progress checkpoints' },
+    { code: 'A 10', category: 'Action & Expression', shortCategory: 'A', text: 'Support project planning' },
+    { code: 'A 11', category: 'Action & Expression', shortCategory: 'A', text: 'Let students track progress' },
+    { code: 'A 12', category: 'Action & Expression', shortCategory: 'A', text: 'Provide multiple attempts' },
+    { code: 'A 13', category: 'Action & Expression', shortCategory: 'A', text: 'Offer presentation choices' },
+    { code: 'A 14', category: 'Action & Expression', shortCategory: 'A', text: 'Offer individual or collaborative options' },
+    { code: 'A 15', category: 'Action & Expression', shortCategory: 'A', text: 'Use Canvas progress tools' }
+  ];
+
+  const state = {
+    remaining: [],
+    called: [],
   };
 
-  const allOptions = Object.entries(CATEGORY_META).flatMap(([prefix, category]) =>
-    category.options.map((text, index) => ({
-      id: `${prefix} ${String(index + 1).padStart(2, '0')}`,
-      prefix,
-      text,
-      category: category.name,
-      label: category.label,
-      cssClass: category.cssClass
-    }))
-  );
+  const elements = {};
 
-  let deck = [];
-  let called = [];
-
-  function byId(id) {
-    return document.getElementById(id);
+  function getElements() {
+    elements.drawButton = document.getElementById('drawButton');
+    elements.undoButton = document.getElementById('undoButton');
+    elements.newGameButton = document.getElementById('newGameButton');
+    elements.currentCode = document.getElementById('currentCode');
+    elements.currentCategory = document.getElementById('currentCategory');
+    elements.currentOption = document.getElementById('currentOption');
+    elements.calledCount = document.getElementById('calledCount');
+    elements.remainingCount = document.getElementById('remainingCount');
+    elements.historyBoard = document.getElementById('historyBoard');
+    elements.emptyState = document.getElementById('emptyState');
   }
 
-  function shuffle(items) {
-    const copy = items.slice();
+  function shuffle(list) {
+    const copy = list.slice();
     for (let i = copy.length - 1; i > 0; i -= 1) {
       const j = Math.floor(Math.random() * (i + 1));
       const temp = copy[i];
@@ -99,129 +85,139 @@
     return copy;
   }
 
+  function categoryClass(option) {
+    if (option.shortCategory === 'E') return 'engagement';
+    if (option.shortCategory === 'R') return 'representation';
+    return 'action';
+  }
+
   function startNewGame() {
-    deck = shuffle(allOptions);
-    called = [];
-    render();
+    state.remaining = shuffle(OPTIONS);
+    state.called = [];
+
+    elements.currentCode.textContent = 'READY';
+    elements.currentCategory.textContent = 'Click “Draw Next” to begin';
+    elements.currentOption.textContent = 'Your first UDL strategy will appear here.';
+
+    renderHistory();
+    updateStats();
   }
 
   function drawNext() {
-    if (deck.length === 0) return;
-    called.push(deck.pop());
-    render();
+    if (state.remaining.length === 0) {
+      elements.currentCode.textContent = 'DONE';
+      elements.currentCategory.textContent = 'All 45 strategies have been called';
+      elements.currentOption.textContent = 'Start a new game to call the strategies again.';
+      updateStats();
+      return;
+    }
+
+    const option = state.remaining.pop();
+    state.called.push(option);
+
+    elements.currentCode.textContent = option.code;
+    elements.currentCategory.textContent = option.category;
+    elements.currentOption.textContent = option.text;
+
+    renderHistory();
+    updateStats();
   }
 
   function undoLast() {
-    if (called.length === 0) return;
-    const last = called.pop();
-    deck.push(last);
-    deck = shuffle(deck);
-    render();
+    if (state.called.length === 0) return;
+
+    const option = state.called.pop();
+    state.remaining.push(option);
+
+    const last = state.called[state.called.length - 1];
+    if (last) {
+      elements.currentCode.textContent = last.code;
+      elements.currentCategory.textContent = last.category;
+      elements.currentOption.textContent = last.text;
+    } else {
+      elements.currentCode.textContent = 'READY';
+      elements.currentCategory.textContent = 'Click “Draw Next” to begin';
+      elements.currentOption.textContent = 'Your first UDL strategy will appear here.';
+    }
+
+    renderHistory();
+    updateStats();
   }
 
-  function renderCurrent() {
-    const currentCall = byId('currentCall');
-    const currentCode = byId('currentCode');
-    const currentText = byId('currentText');
-    const statusHeading = byId('statusHeading');
-    const last = called[called.length - 1];
+  function updateStats() {
+    elements.calledCount.textContent = String(state.called.length);
+    elements.remainingCount.textContent = String(state.remaining.length);
+    elements.undoButton.disabled = state.called.length === 0;
+    elements.drawButton.disabled = state.remaining.length === 0;
+  }
 
-    if (!last) {
-      currentCall.className = 'current-call empty';
-      currentCode.textContent = 'READY';
-      currentText.textContent = 'Select “Draw Next” to begin.';
-      statusHeading.textContent = 'Ready to play';
+  function renderHistory() {
+    elements.historyBoard.innerHTML = '';
+
+    if (state.called.length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'empty-state';
+      empty.textContent = 'No strategies have been called yet.';
+      elements.historyBoard.appendChild(empty);
       return;
     }
 
-    currentCall.className = `current-call ${last.cssClass}`;
-    currentCode.textContent = last.id;
-    currentText.textContent = last.text;
-    statusHeading.textContent = `${last.category} — ${last.label}`;
-  }
-
-  function renderCounts() {
-    const drawBtn = byId('drawBtn');
-    const undoBtn = byId('undoBtn');
-    byId('calledCount').textContent = called.length;
-    byId('totalCount').textContent = allOptions.length;
-    byId('remainingCount').textContent = deck.length;
-    undoBtn.disabled = called.length === 0;
-    drawBtn.disabled = deck.length === 0;
-    drawBtn.textContent = deck.length === 0 ? 'All Options Called' : 'Draw Next';
-  }
-
-  function renderCalledBoard() {
-    const board = byId('calledBoard');
-
-    if (called.length === 0) {
-      board.innerHTML = '<div class="empty-board">No options have been called yet.</div>';
-      return;
-    }
-
-    const fragment = document.createDocumentFragment();
-    called.slice().reverse().forEach((item) => {
+    state.called.forEach(function (option, index) {
       const card = document.createElement('article');
-      card.className = `called-card ${item.cssClass}`;
+      card.className = 'history-card';
+      card.setAttribute('aria-label', 'Call ' + (index + 1) + ': ' + option.code + ', ' + option.text);
 
       const code = document.createElement('div');
-      code.className = 'called-code';
-      code.textContent = item.id;
+      code.className = 'history-code ' + categoryClass(option);
+      code.textContent = option.code;
+
+      const content = document.createElement('div');
 
       const category = document.createElement('div');
-      category.className = 'called-category';
-      category.textContent = item.category;
+      category.className = 'history-category';
+      category.textContent = option.category;
 
       const text = document.createElement('div');
-      text.className = 'called-text';
-      text.textContent = item.text;
+      text.className = 'history-option';
+      text.textContent = option.text;
 
-      card.append(code, category, text);
-      fragment.appendChild(card);
+      content.appendChild(category);
+      content.appendChild(text);
+      card.appendChild(code);
+      card.appendChild(content);
+      elements.historyBoard.appendChild(card);
     });
-
-    board.replaceChildren(fragment);
   }
 
-  function render() {
-    renderCurrent();
-    renderCounts();
-    renderCalledBoard();
+  function handleKeydown(event) {
+    if (event.code !== 'Space') return;
+
+    const tag = document.activeElement && document.activeElement.tagName;
+    if (tag === 'BUTTON' || tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT') return;
+
+    event.preventDefault();
+    drawNext();
   }
 
   function init() {
-    const drawBtn = byId('drawBtn');
-    const undoBtn = byId('undoBtn');
-    const newGameBtn = byId('newGameBtn');
+    getElements();
 
-    if (!drawBtn || !undoBtn || !newGameBtn) {
+    if (!elements.drawButton || !elements.undoButton || !elements.newGameButton) {
       console.error('UDL Bingo Caller: required controls were not found.');
       return;
     }
 
-    drawBtn.addEventListener('click', drawNext);
-    undoBtn.addEventListener('click', undoLast);
-    newGameBtn.addEventListener('click', () => {
-      const shouldReset = called.length === 0 || window.confirm('Start a new game and clear all called options?');
-      if (shouldReset) startNewGame();
-    });
-
-    document.addEventListener('keydown', (event) => {
-      const activeTag = document.activeElement ? document.activeElement.tagName : '';
-      const isTyping = ['INPUT', 'TEXTAREA', 'SELECT'].includes(activeTag);
-
-      if (event.code === 'Space' && !event.repeat && !isTyping && !event.ctrlKey && !event.metaKey && !event.altKey) {
-        event.preventDefault();
-        drawNext();
-      }
-    });
+    elements.drawButton.addEventListener('click', drawNext);
+    elements.undoButton.addEventListener('click', undoLast);
+    elements.newGameButton.addEventListener('click', startNewGame);
+    document.addEventListener('keydown', handleKeydown);
 
     startNewGame();
   }
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
+    document.addEventListener('DOMContentLoaded', init);
   } else {
     init();
   }
-})();
+}());
