@@ -65,7 +65,6 @@
     elements.drawButton = document.getElementById('drawButton');
     elements.undoButton = document.getElementById('undoButton');
     elements.newGameButton = document.getElementById('newGameButton');
-    elements.currentCode = document.getElementById('currentCode');
     elements.currentCategory = document.getElementById('currentCategory');
     elements.currentOption = document.getElementById('currentOption');
     elements.calledCount = document.getElementById('calledCount');
@@ -95,8 +94,7 @@
     state.remaining = shuffle(OPTIONS);
     state.called = [];
 
-    elements.currentCode.textContent = 'READY';
-    elements.currentCategory.textContent = 'Click “Draw Next” to begin';
+    elements.currentCategory.textContent = 'Ready';
     elements.currentOption.textContent = 'Your first UDL strategy will appear here.';
 
     renderHistory();
@@ -105,8 +103,7 @@
 
   function drawNext() {
     if (state.remaining.length === 0) {
-      elements.currentCode.textContent = 'DONE';
-      elements.currentCategory.textContent = 'All 45 strategies have been called';
+      elements.currentCategory.textContent = 'All strategies called';
       elements.currentOption.textContent = 'Start a new game to call the strategies again.';
       updateStats();
       return;
@@ -115,7 +112,6 @@
     const option = state.remaining.pop();
     state.called.push(option);
 
-    elements.currentCode.textContent = option.code;
     elements.currentCategory.textContent = option.category;
     elements.currentOption.textContent = option.text;
 
@@ -131,12 +127,10 @@
 
     const last = state.called[state.called.length - 1];
     if (last) {
-      elements.currentCode.textContent = last.code;
       elements.currentCategory.textContent = last.category;
       elements.currentOption.textContent = last.text;
     } else {
-      elements.currentCode.textContent = 'READY';
-      elements.currentCategory.textContent = 'Click “Draw Next” to begin';
+      elements.currentCategory.textContent = 'Ready';
       elements.currentOption.textContent = 'Your first UDL strategy will appear here.';
     }
 
@@ -165,11 +159,7 @@
     state.called.forEach(function (option, index) {
       const card = document.createElement('article');
       card.className = 'history-card';
-      card.setAttribute('aria-label', 'Call ' + (index + 1) + ': ' + option.code + ', ' + option.text);
-
-      const code = document.createElement('div');
-      code.className = 'history-code ' + categoryClass(option);
-      code.textContent = option.code;
+      card.setAttribute('aria-label', 'Call ' + (index + 1) + ': ' + option.category + ', ' + option.text);
 
       const content = document.createElement('div');
 
@@ -183,7 +173,6 @@
 
       content.appendChild(category);
       content.appendChild(text);
-      card.appendChild(code);
       card.appendChild(content);
       elements.historyBoard.appendChild(card);
     });
