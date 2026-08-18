@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#1f4e5f" />
+  <title>UDL Bingo Caller</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app-shell">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Universal Design for Learning</p>
+        <h1>UDL Bingo Caller</h1>
+        <p class="subtitle">Draw a UDL strategy, call its code, and keep the full set of called options visible for the room.</p>
+      </div>
+      <div class="header-actions">
+        <button id="newGameBtn" class="button button-secondary" type="button">New Game</button>
+      </div>
+    </header>
+
+    <section class="dashboard" aria-label="Bingo game dashboard">
+      <section class="caller-panel card" aria-live="polite">
+        <div class="panel-heading">
+          <div>
+            <p class="section-label">Current call</p>
+            <h2 id="statusHeading">Ready to play</h2>
+          </div>
+          <div class="counter" aria-label="Calls made"><span id="calledCount">0</span><span class="counter-separator">/</span><span id="totalCount">45</span></div>
+        </div>
+
+        <div id="currentCall" class="current-call empty">
+          <div class="current-code">READY</div>
+          <div class="current-text">Select “Draw Next” to begin.</div>
+        </div>
+
+        <div class="caller-controls">
+          <button id="drawBtn" class="button button-primary" type="button">Draw Next</button>
+          <button id="undoBtn" class="button button-secondary" type="button" disabled>Undo Last</button>
+        </div>
+
+        <div class="keyboard-tip"><kbd>Space</kbd> Draw next call</div>
+      </section>
+
+      <aside class="guide-panel card">
+        <div class="panel-heading compact">
+          <div>
+            <p class="section-label">Code system</p>
+            <h2>How the prefixes work</h2>
+          </div>
+        </div>
+        <div class="prefix-list">
+          <div class="prefix-row engagement"><span class="prefix-badge">E</span><div><strong>Engagement</strong><small>WHY</small></div></div>
+          <div class="prefix-row representation"><span class="prefix-badge">R</span><div><strong>Representation</strong><small>WHAT</small></div></div>
+          <div class="prefix-row action"><span class="prefix-badge">A</span><div><strong>Action &amp; Expression</strong><small>HOW</small></div></div>
+        </div>
+        <p class="guide-note">Each option has a permanent code such as <strong>E 01</strong>, <strong>R 01</strong>, or <strong>A 01</strong>. Codes are unique across the game.</p>
+      </aside>
+    </section>
+
+    <section class="called-section">
+      <div class="section-header">
+        <div>
+          <p class="section-label">Called options</p>
+          <h2>All strategies called so far</h2>
+        </div>
+        <div class="remaining-pill"><span id="remainingCount">45</span> remaining</div>
+      </div>
+
+      <div id="calledBoard" class="called-board" aria-live="polite">
+        <div class="empty-board">No options have been called yet.</div>
+      </div>
+    </section>
+  </main>
+
+  <template id="calledCardTemplate">
+    <article class="called-card">
+      <div class="called-code"></div>
+      <div class="called-category"></div>
+      <div class="called-text"></div>
+    </article>
+  </template>
+
+  <script src="script.js?v=2" defer></script>
+</body>
+</html>
